@@ -7,5 +7,6 @@ public class HelloWorldApplication extends ResourceConfig {
 	        // Define the package which contains the service classes.
 	        packages("com.rolon.rest");
 	    }
+	    
 }
 
