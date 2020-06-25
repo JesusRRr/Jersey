@@ -10,9 +10,11 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.rolon.rest.model.User;
+import com.rolon.rest.service.UserService;
 
 @Path("/")
 public class HelloWorldService {
+	private UserService userService;
 
     @GET
     @Path("/{name}")
@@ -26,10 +28,19 @@ public class HelloWorldService {
     @Consumes("application/json")
     @Produces("application/json")
     public Response createUser(User user) {
-    	
-    	System.out.println(user);
+    	userService.getInsance().saveUser(user);
     	Gson gson = new Gson();
     	String output = gson.toJson(user);
+        return Response.status(200).entity(output).build();
+    }
+    
+    @GET
+    @Path("/getusers")
+    @Produces("application/json")
+    public Response getUsers() {
+    	Gson gson = new Gson();
+    	String output = gson.toJson(userService.getInsance().getUsers());
+    	System.out.println(userService.getInsance().getUsers());
         return Response.status(200).entity(output).build();
     }
     
